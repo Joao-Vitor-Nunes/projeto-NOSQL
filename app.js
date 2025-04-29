@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const app = express();
 const usuariosRouter = require('./routes/usuarios');
 
+app.use(express.urlencoded({ extended: true }));
+
+
 
 // Middleware para parsing de JSON
 app.use(express.json());
