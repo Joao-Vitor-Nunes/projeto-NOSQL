@@ -1,34 +1,27 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
-const bodyParser = require('body-parser');
 
 const app = express();
+const usuariosRouter = require('./routes/usuarios');
 
-// Configurações
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 
-// Conexão MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB conectado!'))
-  .catch(err => console.log('Erro ao conectar no MongoDB:', err));
+// Middleware para parsing de JSON
+app.use(express.json());
+app.use('/usuarios', usuariosRouter);
+// Conexão com o MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Conectado ao MongoDB'))
+.catch((err) => console.error('Erro ao conectar ao MongoDB:', err));
 
-// Importar Rotas
-const livroRoutes = require('./routes/livroRoutes');
+// Rotas
+// Exemplo: app.use('/usuarios', require('./routes/usuarios'));
 
-// Usar Rotas
-app.use('/livros', livroRoutes);
-
-// Página Inicial
-app.get('/', (req, res) => {
-  res.send('Bem vindo à Biblioteca!');
-});
-
-// Iniciar servidor
+// Iniciar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
