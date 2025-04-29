@@ -1,0 +1,12 @@
+<h1>Livros Cadastrados</h1>
+<a href="/livros/cadastrar">Novo Livro</a>
+
+<ul>
+  <% livros.forEach(livro => { %>
+    <li><%= livro.titulo %> - <%= livro.autor %>
+      <form action="/livros/deletar/<%= livro._id %>" method="POST" style="display:inline;">
+        <button type="submit">Deletar</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
