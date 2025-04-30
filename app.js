@@ -5,23 +5,26 @@ const mongoose = require('mongoose');
 const app = express();
 const usuariosRouter = require('./routes/usuarios');
 
+// Middleware para receber dados dos formulários e JSON
 app.use(express.urlencoded({ extended: true }));
-
-
-
-// Middleware para parsing de JSON
 app.use(express.json());
-app.use('/usuarios', usuariosRouter);
-// Conexão com o MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('Conectado ao MongoDB'))
-.catch((err) => console.error('Erro ao conectar ao MongoDB:', err));
+
+// Configuração do EJS
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 // Rotas
-// Exemplo: app.use('/usuarios', require('./routes/usuarios'));
+app.use('/usuarios', usuariosRouter);
+
+// Redirecionamento da raiz para a criação de usuário
+app.get('/', (req, res) => {
+  res.redirect('/usuarios/novo');
+});
+
+// Conexão com o MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Conectado ao MongoDB'))
+  .catch((err) => console.error('Erro ao conectar ao MongoDB:', err));
 
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;
