@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Livros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+    .livro {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 500px;
+    }
+    .livro strong {
+      display: inline-block;
+      width: 90px;
+      color: #444;
+    }
+    .add-btn {
+      display: block;
+      width: 200px;
+      margin: 2rem auto 0;
+      text-align: center;
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .add-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Livros</h1>
+
+  <% livros.forEach(livro => { %>
+    <div class="livro">
+      <p><strong>Título:</strong> <%= livro.titulo %></p>
+      <p><strong>Autor:</strong> <%= livro.autor %></p>
+      <p><strong>Editora:</strong> <%= livro.editora %></p>
+      <p><strong>Ano:</strong> <%= livro.ano %></p>
+      <p><strong>Gênero:</strong> <%= livro.genero %></p>
+      <p><strong>ISBN:</strong> <%= livro.isbn %></p>
+    </div>
+  <% }) %>
+
+  <a class="add-btn" href="/livros/novo">Adicionar Novo Livro</a>
+</body>
+</html>

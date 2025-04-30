@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const usuariosRouter = require('./routes/usuarios');
+const livrosRouter = require('./routes/livros');
 
 // Middleware para receber dados dos formulários e JSON
 app.use(express.urlencoded({ extended: true }));
@@ -15,11 +16,12 @@ app.set('views', './views');
 
 // Rotas
 app.use('/usuarios', usuariosRouter);
-
+app.use('/livros', livrosRouter);
 // Redirecionamento da raiz para a criação de usuário
 app.get('/', (req, res) => {
-  res.redirect('/usuarios/novo');
+  res.render('index');
 });
+
 
 // Conexão com o MongoDB
 mongoose.connect(process.env.MONGODB_URI)
