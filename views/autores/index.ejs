@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Autores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+    .autor {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 500px;
+    }
+    .autor strong {
+      display: inline-block;
+      width: 120px;
+      color: #444;
+    }
+    .add-btn {
+      display: block;
+      width: 200px;
+      margin: 2rem auto 0;
+      text-align: center;
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .add-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Autores</h1>
+
+  <% autores.forEach(autor => { %>
+    <div class="autor">
+      <p><strong>Nome:</strong> <%= autor.nome %></p>
+      <p><strong>Nacionalidade:</strong> <%= autor.nacionalidade %></p>
+    </div>
+  <% }) %>
+
+  <a class="add-btn" href="/autores/novo">Adicionar Novo Autor</a>
+</body>
+</html>
